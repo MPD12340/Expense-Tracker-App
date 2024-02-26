@@ -1,0 +1,56 @@
+ {% extends "base.html" %}
+
+ {% block title %}Landing Page{% endblock title %}
+ {% block content %}
+<section class='container'>
+    <div class='row justify-content-around text-center mt-5'>
+        <div class='col-sm-8'>
+            <h1>Expense Tracker App </h1>
+        </div>
+    </div>
+</section>
+<section class='container'>
+    <div class='row'>
+        <div class='col-sm-8'>
+            <a href='/add' class='btn btn-primary'>ADD EXPENSE</a>
+        </div>
+    </div>
+    <div class='row justify-content-around text-center mt-5'>
+        <div class='col-sm-8'>
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">S.No.</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Date</th>
+                      <th scope="col" colspan="2">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for expense in expense_data %}
+                    <tr>
+                      <th scope="row">{{forloop.counter}}</th>
+                      <td>{{expense.title}}</td>
+                      <td>{{expense.amount}}</td>
+                      <td>{{expense.date}}</td>
+                      <td>
+                        <form action="{% url 'expenses:delete_expense' id=expense.id %}" method="POST">
+
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ expense.id }}">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                      </td>
+                      <td>
+                        <a href="{% url 'expenses:edit_expense' id=expense.id %}" class="btn btn-info">Edit</a>
+
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+        </div>
+    </div>
+</section>
+ {% endblock content %}
