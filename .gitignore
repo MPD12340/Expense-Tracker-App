@@ -1,1 +1,23 @@
+# Ignore SQLite database file
+*.sqlite3
+
+# Ignore Python byte code files
+*.pyc
+__pycache__/
+
+# Ignore environment configuration files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore static files directory
+/static/
+
+# Ignore media files directory
+/media/
+
+# Ignore database migrations
+**/migrations/
+
 myenv/
