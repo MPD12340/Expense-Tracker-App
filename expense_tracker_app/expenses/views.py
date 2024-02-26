@@ -27,9 +27,7 @@ class Add_Expense(View):
 
 
 class Delete_Expense(View):
-    def post(self, request):
-        data = request.POST
-        id = data.get('id')
+    def post(self, request, id):  # Include 'id' as an argument
         expense_data = Expense.objects.get(id=id)
         expense_data.delete()
         return redirect('/')
